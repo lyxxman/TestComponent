@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+apply from: "config.gradle"
+def cfg = project.ext.android
+def dpc = project.ext.dependencies
+android {
+    compileSdkVersion cfg.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
+        versionCode cfg.versionCode
+        versionName cfg.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleCompatible
+    implementation "com.android.support:appcompat-v7:$dpc.appcompatv7"
+    testImplementation "junit:junit:$dpc.junit"
+    androidTestImplementation "com.android.support.test:runner:$dpc.testRunner"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$dpc.express"
+    api "com.alibaba:arouter-api:$dpc.arouterApi"
+    annotationProcessor "com.alibaba:arouter-compiler:$dpc.arouterCompiler"
+    api "com.google.dagger:dagger-android:$dpc.daggerAndroid"
+    api "com.google.dagger:dagger-android-support:$dpc.daggerAndroidSupport"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$dpc.daggerAndroidProcessor"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dpc.daggerCompiler"
+    api "com.squareup.retrofit2:retrofit:$dpc.retrofit"
+    api "com.squareup.retrofit2:converter-gson:$dpc.retrofitGson"
+    api "io.reactivex.rxjava2:rxandroid:$dpc.rxAndroid"
+    api "io.reactivex.rxjava2:rxjava:$dpc.rxJava"
+    api "com.squareup.retrofit2:adapter-rxjava:$dpc.adapterRxJava"
+}
+
+

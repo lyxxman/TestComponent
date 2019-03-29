@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ly.zhibo" >
+    <application>
+        <activity
+            android:name=".ZhiBoActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+</manifest>
